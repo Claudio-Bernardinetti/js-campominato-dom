@@ -32,6 +32,10 @@ body {
 	background-color: blue;
 }
 
+.bg-red {
+	background-color: red;
+}
+
 .square
 {
 	display: flex;

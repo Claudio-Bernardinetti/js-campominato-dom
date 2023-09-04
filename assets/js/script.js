@@ -34,6 +34,17 @@ document.querySelector('.play').addEventListener('click', ()=> {
 
     const difficultySelect = document.querySelector('.difficulty');
     let limit = Number(difficultySelect.value);
+
+    // Loop while per generare 16 bombs con Math.random.
+    const bombs = [];
+    while (bombs.length < 16) {
+        const bomb = Math.floor(Math.random() * limit) + 1;
+        
+        if (!bombs.includes(bomb)) {
+            bombs.push(bomb);
+        }
+    }
+    console.log(`Nelle caselle ${bombs} c'e' una Bomba`);
     
     function generateField(domElement, limit) {
         
@@ -64,14 +75,23 @@ document.querySelector('.play').addEventListener('click', ()=> {
             cellElement.append(i + 1);
             domElement.append(cellElement);
         
-            
-                // aggiungo l'event listener alla cella che ho appena generato
-               cellElement.addEventListener('click', function () {
+
+                cellElement.addEventListener('click', function () {
+                    if (bombs.includes(i + 1)) {
+                    this.classList.add('bg-red');
+                    this.textContent = '💣';
+                    console.log(`Cella numero ${i + 1} BOMB`);
+                    // Casella rossa e bomba
+
+                    } else {
+                    this.classList.toggle('bg-blue');
+                    console.log(`Cella numero ${i + 1}`);
+                    // Casella blu e numero
+                    }
+
+                });
                 
-                this.classList.toggle('bg-blue')
-                console.log(`Cella numero ${i + 1}`);
-                
-                })
+               
         }
 
     }
@@ -100,11 +120,6 @@ document.querySelector('.reset').addEventListener('click', () => {
 });
 
 
-/* difficultySelect.addEventListener('change', () => {
-    
-const difficultySelect = document.querySelector('.difficulty');
-limit = parseInt(difficultySelect.value);
 
-limit = parseInt(difficultySelect.value);
-generateField(fieldElement, limit);
-}); */
+
+  
