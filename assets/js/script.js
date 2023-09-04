@@ -40,23 +40,38 @@ document.querySelector('.play').addEventListener('click', ()=> {
         // Pulisci la griglia esistente.
         domElement.innerHTML = '';
 
-        // Creare in JavaScript una griglia 10 * 10. 
+        // Creare in JavaScript una griglia. 
         // genero il campo da gioco 
         for (let i = 0; i < limit; i++) {
-    
-        const cellElement = document.createElement('div')
-        cellElement.className = 'cell'
-        cellElement.append(i + 1)
-        domElement.append(cellElement)
-    
+
+            // Cambio disposizione cell.
+            const cellElement = document.createElement('div')
+
+            if (limit === 100) {
+                cellElement.className = 'cell';
+                //caselle per 10 righe
+
+            } else if (limit === 81) {
+                cellElement.className = 'cell2';
+                //caselle per 9 righe
+
+            } else if (limit === 49) {
+                cellElement.className = 'cell3';
+                //caselle per 7 righe
+            }
+
+            
+            cellElement.append(i + 1);
+            domElement.append(cellElement);
         
-        // aggiungo l'event listener alla cella che ho appena generato
-        cellElement.addEventListener('click', function () {
             
-            this.classList.toggle('bg-green')
-            console.log(`Cella numero ${i + 1}`);
-            
-            })
+                // aggiungo l'event listener alla cella che ho appena generato
+               cellElement.addEventListener('click', function () {
+                
+                this.classList.toggle('bg-blue')
+                console.log(`Cella numero ${i + 1}`);
+                
+                })
         }
 
     }

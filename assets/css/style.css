@@ -28,7 +28,7 @@ body {
 	margin: 2rem auto;
 }
 
-.bg-green {
+.bg-blue {
 	background-color: blue;
 }
 
@@ -37,7 +37,9 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 
-	& .cell
+	.cell,
+	.cell2,
+	.cell3
 	{
 		width: calc(100% / 10);
 		aspect-ratio: 1 / 1;
@@ -46,7 +48,14 @@ body {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
 
+	.cell2 {
+		width: calc(100% / 9);
+	}
+
+	.cell3 {
+		width: calc(100% / 7);
 	}
 
 }
