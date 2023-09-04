@@ -31,6 +31,9 @@ Eventuali validazioni e i controlli possiamo farli anche in un secondo momento. 
 // Ogni volta che clicco su un quadrato questo si colora di verde
 
 document.querySelector('.play').addEventListener('click', ()=> {
+
+    const difficultySelect = document.querySelector('.difficulty');
+    let limit = Number(difficultySelect.value);
     
     function generateField(domElement, limit) {
         
@@ -59,23 +62,34 @@ document.querySelector('.play').addEventListener('click', ()=> {
     }
     
     const fieldElement = document.querySelector('.square')
-    const limit = 100
     generateField(fieldElement, limit)
+    
 
+    
 });
 
 document.querySelector('.reset').addEventListener('click', () => {
-
+    
     const fieldElement = document.querySelector('.square');
-
+    
     // Rimuovi tutte le celle dal cmpo di gioco
-
+    
     while (fieldElement.firstChild) {
         fieldElement.removeChild(fieldElement.firstChild);
     }
-
+    
     // Pulisci la console
-
+    
     console.clear();
     
 });
+
+
+/* difficultySelect.addEventListener('change', () => {
+    
+const difficultySelect = document.querySelector('.difficulty');
+limit = parseInt(difficultySelect.value);
+
+limit = parseInt(difficultySelect.value);
+generateField(fieldElement, limit);
+}); */

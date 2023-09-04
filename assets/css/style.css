@@ -8,11 +8,7 @@ body {
 	background: black;
 }
 
-.buttons {
-    text-align: center;
-}
-
-.play, .reset {
+.play, .reset, .difficulty{
     margin-top: 1rem;
     padding: 1rem;
     border-radius: 5px;
