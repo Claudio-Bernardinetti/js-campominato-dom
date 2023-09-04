@@ -8,7 +8,7 @@ body {
 	background: black;
 }
 
-.play, .reset, .difficulty{
+.play, .difficulty{
     margin-top: 1rem;
     padding: 1rem;
     border-radius: 5px;
@@ -19,9 +19,9 @@ body {
     background-color: green;
 }
 
-.reset {
+/* .reset {
     background-color:red;
-}
+} */
 
 .container {
 	max-width: 800px;
@@ -63,3 +63,9 @@ body {
 	}
 
 }
+
+.printEnd, .printInstruction {
+	color: red;
+	text-align: center;
+}
+

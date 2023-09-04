@@ -34,7 +34,6 @@ document.querySelector('.play').addEventListener('click', ()=> {
 
     const difficultySelect = document.querySelector('.difficulty');
     let limit = Number(difficultySelect.value);
-
     // Loop while per generare 16 bombs con Math.random.
     const bombs = [];
     while (bombs.length < 16) {
@@ -70,29 +69,37 @@ document.querySelector('.play').addEventListener('click', ()=> {
                 cellElement.className = 'cell3';
                 //caselle per 7 righe
             }
-
+            
             
             cellElement.append(i + 1);
             domElement.append(cellElement);
-        
 
-                cellElement.addEventListener('click', function () {
-                    if (bombs.includes(i + 1)) {
+            let score = 0;
+            cellElement.addEventListener('click', function () {
+                if (bombs.includes(i + 1)) {
                     this.classList.add('bg-red');
                     this.textContent = '💣';
-                    console.log(`Cella numero ${i + 1} BOMB`);
-                    // Casella rossa e bomba
-
-                    } else {
-                    this.classList.toggle('bg-blue');
-                    console.log(`Cella numero ${i + 1}`);
-                    // Casella blu e numero
-                    }
-
-                });
+                    // Termina la partita
+                    // Comunica il punteggio al giocatore
+                    alert(`Hai perso! Il tuo punteggio è ${i}`);
+                } else  {
+                    this.classList.add('bg-blue');
+                    score++;
+                    // Continua la partita
+                }
                 
+                
+                if (score === limit - bombs.length) {
+                    // Termina la partita
+                    // Comunica il punteggio al giocatore
+                    alert(`Hai vinto! Il tuo punteggio è ${i}`);
+                } 
+                
+            });
+                
+                
+         }
                
-        }
 
     }
     
@@ -103,23 +110,5 @@ document.querySelector('.play').addEventListener('click', ()=> {
     
 });
 
-document.querySelector('.reset').addEventListener('click', () => {
-    
-    const fieldElement = document.querySelector('.square');
-    
-    // Rimuovi tutte le celle dal cmpo di gioco
-    
-    while (fieldElement.firstChild) {
-        fieldElement.removeChild(fieldElement.firstChild);
-    }
-    
-    // Pulisci la console
-    
-    console.clear();
-    
-});
 
 
-
-
-  
