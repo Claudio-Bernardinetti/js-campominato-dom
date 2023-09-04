@@ -1,0 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+	background: black;
+}
+
+.buttons {
+    text-align: center;
+}
+
+.play, .reset {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 2px solid white;
+}
+
+.play {
+    background-color: green;
+}
+
+.reset {
+    background-color:red;
+}
+
+.container {
+	max-width: 800px;
+	margin: 2rem auto;
+}
+
+.bg-green {
+	background-color: blue;
+}
+
+.square
+{
+	display: flex;
+	flex-wrap: wrap;
+
+	& .cell
+	{
+		width: calc(100% / 10);
+		aspect-ratio: 1 / 1;
+		border: 2px solid white;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+	}
+
+}
