@@ -34,6 +34,7 @@ document.querySelector('.play').addEventListener('click', ()=> {
 
     const difficultySelect = document.querySelector('.difficulty');
     let limit = Number(difficultySelect.value);
+    let printEl = document.querySelector('.print');
     
     // Loop while per generare 16 bombs con Math.random.
     const bombs = [];
@@ -50,7 +51,8 @@ document.querySelector('.play').addEventListener('click', ()=> {
         
         // Pulisci la griglia esistente.
         domElement.innerHTML = '';
-        
+        printEl.innerHTML = '';
+
         let score = 0;
         // Creare in JavaScript una griglia. 
         // genero il campo da gioco 
@@ -72,7 +74,7 @@ document.querySelector('.play').addEventListener('click', ()=> {
                 //caselle per 7 righe
             }  else if (limit === 18) {
                 cellElement.className = 'cell4';
-                //caselle per 7 righe
+                //caselle per debugging 
             }
             
             
@@ -86,7 +88,7 @@ document.querySelector('.play').addEventListener('click', ()=> {
                     this.textContent = '💣';
                     // Termina la partita
                     // Comunica il punteggio al giocatore
-                    alert(`Hai perso! Il tuo punteggio è ${i}`);
+                    printEl.innerHTML = `Hai perso! Il tuo punteggio è ${i}`;
                 } else  {
                     this.classList.add('bg-blue');
                     score++;
@@ -97,7 +99,7 @@ document.querySelector('.play').addEventListener('click', ()=> {
                 if (score === limit - bombs.length) {
                     // Termina la partita
                     // Comunica il punteggio al giocatore
-                    alert(`Hai vinto! Il tuo punteggio è ${score}`);
+                    printEl.innerHTML = `Hai vinto! Il tuo punteggio è ${score}`;
                 } 
                 
             });
