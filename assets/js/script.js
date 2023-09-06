@@ -32,90 +32,100 @@ Eventuali validazioni e i controlli possiamo farli anche in un secondo momento. 
 
 document.querySelector('.play').addEventListener('click', ()=> {
 
-    const difficultySelect = document.querySelector('.difficulty');
-    let limit = Number(difficultySelect.value);
+    const difficultySelectEl = document.querySelector('.difficulty');
+    const printInstructionEl = document.querySelector('.printInstruction'); 
+    let limit = Number(difficultySelectEl.value);
     let printEl = document.querySelector('.print');
-    
-    // Loop while per generare 16 bombs con Math.random.
-    const bombs = [];
-    while (bombs.length < 16) {
-        const bomb = Math.floor(Math.random() * limit) + 1;
-        
-        if (!bombs.includes(bomb)) {
-            bombs.push(bomb);
+
+    // Generate bombs
+    function generateBombs(limit) {
+        const bombs = [];
+        while (bombs.length < 16) {
+            const bomb = Math.floor(Math.random() * limit) + 1;
+            if (!bombs.includes(bomb)) {
+                bombs.push(bomb);
+            }
         }
+        return bombs;
     }
-    console.log(`Nelle caselle ${bombs} c'e' una Bomba`);
-    
-    function generateField(domElement, limit) {
-        
-        // Pulisci la griglia esistente.
+
+    // Generate field
+    function generateField(domElement, limit, bombs) {
+        // Clear existing grid
         domElement.innerHTML = '';
         printEl.innerHTML = '';
+        printInstructionEl.innerHTML = '';
 
         let score = 0;
-        // Creare in JavaScript una griglia. 
-        // genero il campo da gioco 
+        // Create grid in JavaScript
         for (let i = 0; i < limit; i++) {
-
-            // Cambio disposizione cell.
+            // Change cell layout
             const cellElement = document.createElement('div')
-
             if (limit === 100) {
                 cellElement.className = 'cell';
-                //caselle per 10 righe
-
             } else if (limit === 81) {
                 cellElement.className = 'cell2';
-                //caselle per 9 righe
-
             } else if (limit === 49) {
                 cellElement.className = 'cell3';
-                //caselle per 7 righe
-            }  else if (limit === 18) {
-                cellElement.className = 'cell4';
-                //caselle per debugging 
-            }
-            
-            
+            } 
+
+
             cellElement.append(i + 1);
             domElement.append(cellElement);
+
+            // Add event listener to cell
+            cellElement.addEventListener('click', handleCellClick);
+        }
+
+        function handleCellClick(event) {
+            const i = Number(event.target.textContent) - 1;
+            if (bombs.includes(i + 1)) {
+                event.target.classList.add('bg-red');
+                event.target.textContent = '💣';
+                // End game
+                gameOver(false);
+
+            } else {
+                event.target.classList.add('bg-blue');
+                score++;
+                // Continue game
+            }
+
+            if (score === limit - bombs.length) {
+                // End game
+                gameOver(true);
+            }
+        }
+
+        function gameOver(won) {
+            // Communicate score to player
+            if (won) {
+                printEl.innerHTML = `Hai vinto! Il tuo punteggio è ${score}`;
+                printInstructionEl.innerHTML = `Choose the difficulty and pres PLAY to play again!`
+            } else {
+                printEl.innerHTML = `Hai perso! Il tuo punteggio è ${score}`;
+                printInstructionEl.innerHTML = `Choose the difficulty and pres PLAY to play again!`
+            }
             
-
-            cellElement.addEventListener('click', function () {
-                if (bombs.includes(i + 1)) {
-                    this.classList.add('bg-red');
-                    this.textContent = '💣';
-                    // Termina la partita
-                    // Comunica il punteggio al giocatore
-                    printEl.innerHTML = `Hai perso! Il tuo punteggio è ${i}`;
-                } else  {
-                    this.classList.add('bg-blue');
-                    score++;
-                    // Continua la partita
-                }
-                
-                
-                if (score === limit - bombs.length) {
-                    // Termina la partita
-                    // Comunica il punteggio al giocatore
-                    printEl.innerHTML = `Hai vinto! Il tuo punteggio è ${score}`;
-                } 
-                
+            // Remove event listeners from all cells
+            const cells = document.querySelectorAll('.cell, .cell2, .cell3');
+            cells.forEach(cell => {
+                cell.removeEventListener('click', handleCellClick);
             });
-                
-                
-         }
-               
-
+        }
     }
-    
-    const fieldElement = document.querySelector('.square')
-    generateField(fieldElement, limit)
-    
+
+    document.querySelector('.play').addEventListener('click', () => {
+        const bombs = generateBombs(limit);
+        console.log(bombs.sort(function (a,b) {return a - b }));
+        
+        const fieldElement = document.querySelector('.square')
+        generateField(fieldElement, limit, bombs)
+    });
 
     
 });
 
 
+ 
 

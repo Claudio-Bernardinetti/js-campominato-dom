@@ -19,10 +19,6 @@ body {
     background-color: green;
 }
 
-/* .reset {
-    background-color:red;
-} */
-
 .container {
 	max-width: 800px;
 	margin: 2rem auto;
@@ -43,8 +39,7 @@ body {
 
 	.cell,
 	.cell2,
-	.cell3,
-	.cell4
+	.cell3
 	{
 		width: calc(100% / 10);
 		aspect-ratio: 1 / 1;
@@ -63,13 +58,15 @@ body {
 		width: calc(100% / 7);
 	}
 
-	.cell4 {
-		width: calc(100% / 4);
-	}
 
 }
 
 .print {
+	color: red;
+	text-align: center;
+}
+
+.printInstruction {
 	color: red;
 	text-align: center;
 }
